@@ -1,8 +1,11 @@
-# Logs
+# logs
 logs
 *.log
 npm-debug.log*
 
-# Dependency directories
+# dependencies
 node_modules
 bower_components
+
+# build
+app/assets

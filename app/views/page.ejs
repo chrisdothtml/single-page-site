@@ -1,0 +1,26 @@
+<html>
+  <head>
+    <title>Single Page Site</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="/assets/app.min.css" />
+  </head>
+  <body>
+
+    <% include siteframe/header.ejs %>
+
+    <main id="main">
+      <%- include(`content/${page}.ejs`) %>
+    </main>
+
+    <% include siteframe/footer.ejs %>
+
+    <script src="/assets/vendor.min.js"></script>
+    <script>
+      spf.init()
+    </script>
+  </body>
+</html>
