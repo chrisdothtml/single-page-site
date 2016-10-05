@@ -1,26 +1,54 @@
 'use strict'
 
 /**
- * Gathers a glob to use for concatting bower
- * packages
+ * Resolves provided paths object
+ *
+ * @returns {array}
  */
-function getBowerGlobs () {
-  var result = []
-  const packages = {
-    spf: 'dist/spf.js'
+function resolvePaths (paths) {
+  const result = []
+
+  /**
+   * Prepends provided base to provided path
+   */
+  function addBase (base, path) {
+    var result = path
+
+    // add if exists
+    if (base) result = `${base}/${path}`
+
+    return result
   }
 
-  for (let name in packages) {
-    if (!packages.hasOwnProperty(name)) continue
+  /**
+   * Recursively builds paths and adds them
+   * to the result array
+   */
+  function resolve (path, base) {
+    if (typeof path === 'string') {
+      path = addBase(base, path)
+      result.push(path)
+    } else if (Array.isArray(path)) {
+      // resolve each
+      path.forEach(subPath => {
+        resolve(subPath, base)
+      })
+    } else if (typeof path === 'object') {
+      // add base and resolve for each
+      for (let subPath in path) {
+        if (!path.hasOwnProperty(subPath)) continue
 
-    let path = packages[name]
+        let subBase = addBase(base, subPath)
 
-    result.push(`bower_components/${name}/${path}`)
+        resolve(path[subPath], subBase)
+      }
+    }
   }
 
+  resolve(paths)
   return result
 }
 
 module.exports = {
-  getBowerGlobs
+  resolvePaths
 }

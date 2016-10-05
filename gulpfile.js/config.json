@@ -1,0 +1,16 @@
+{
+  "vendor": {
+    "node_modules": {
+      "jquery/dist": "jquery.min.js",
+      "tether/dist": [
+        "css/tether.min.css",
+        "js/tether.min.js"
+      ],
+      "bootstrap/dist": [
+        "css/bootstrap.min.css",
+        "js/bootstrap.min.js"
+      ],
+      "spf/dist": "spf.js"
+    }
+  }
+}
